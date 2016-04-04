@@ -59,7 +59,11 @@ class Parser
                         $inSubArray = false;
 
                         if (!is_null($key)) {
-                            $result[$key] = $value;
+                            if (!empty($result[$key])) {
+                                $result[$key] = array_replace($value, $result[$key]);
+                            } else {
+                                $result[$key] = $value;
+                            }
                         } else {
                             $result = $value;
                         }
